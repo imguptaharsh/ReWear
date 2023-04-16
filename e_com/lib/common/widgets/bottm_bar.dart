@@ -1,4 +1,5 @@
 import 'package:e_com/features/account/screen/account_screen.dart';
+import 'package:e_com/features/cart/screen/cart_screen.dart.dart';
 import 'package:e_com/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +24,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text('Cart Page'),
-    ),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {

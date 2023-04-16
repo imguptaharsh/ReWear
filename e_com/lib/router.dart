@@ -1,3 +1,4 @@
+import 'package:e_com/features/address/screen/address_screen.dart';
 import 'package:e_com/features/admin/screen/add_product_screen.dart';
 import 'package:e_com/features/home/screen/category_deals_screen.dart';
 import 'package:e_com/features/home/screen/home_screen.dart';
@@ -30,6 +31,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProduct(),
+      );
+    case AddressScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const AddressScreen(),
       );
     case ProductDetailScreen.routeName:
       var product = routeSettings.arguments as Product;

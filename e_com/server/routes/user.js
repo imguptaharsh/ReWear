@@ -86,7 +86,7 @@ userRouter.post("/api/order", auth, async (req, res) => {
         await product.save();
       } else {
         return res
-          .status (400)
+          .status(400)
           .json({ msg: `${product.name} is out of stock!` });
       }
     }

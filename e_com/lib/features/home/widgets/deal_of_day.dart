@@ -47,10 +47,14 @@ class _DealOfDayState extends State<DealOfDay> {
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: const EdgeInsets.only(left: 10, top: 15),
+                      padding: const EdgeInsets.all(8),
                       child: const Text(
                         'Deal of the day',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 107, 59, 37),
+                        ),
                       ),
                     ),
                     Image.network(

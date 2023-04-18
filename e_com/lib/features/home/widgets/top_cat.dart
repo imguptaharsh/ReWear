@@ -34,12 +34,12 @@ class TopCategories extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(60),
+                    borderRadius: BorderRadius.circular(0),
                     child: Image.asset(
                       GlobalVariables.categoryImages[index]['image']!,
                       fit: BoxFit.cover,
-                      height: 40,
-                      width: 40,
+                      height: 45,
+                      width: 45,
                     ),
                   ),
                 ),

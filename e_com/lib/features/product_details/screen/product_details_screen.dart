@@ -206,7 +206,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: CustomButton(
                 text: 'Add to Cart',
                 onTap: addToCart,
-                color: const Color.fromRGBO(254, 216, 19, 1),
+                color: Color.fromARGB(255, 140, 129, 122),
               ),
             ),
             const SizedBox(height: 10),
@@ -231,10 +231,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-              itemBuilder: (context, _) => const Icon(
-                Icons.star,
-                color: Color.fromARGB(255, 255, 187, 14),
-              ),
+              itemBuilder: (context, _) =>
+                  Icon(Icons.star, color: Colors.amberAccent.shade700),
               // onRatingUpdate: (rating) {},
               onRatingUpdate: (rating) {
                 productDetailsServices.rateProduct(

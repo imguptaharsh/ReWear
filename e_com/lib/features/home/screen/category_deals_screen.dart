@@ -45,7 +45,7 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
             ),
           ),
           title: Text(
-            widget.category,
+            '${widget.category}',
             style: const TextStyle(
               color: Colors.black,
             ),
@@ -53,7 +53,7 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
         ),
       ),
       body: productList == null
-          ? const Loader()
+          ? const CircularProgressIndicator()
           : Column(
               children: [
                 Container(
@@ -69,59 +69,58 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
                 SizedBox(
                   height: 170,
                   child: GridView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.only(left: 50),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: 1.4,
-                      mainAxisSpacing: 10,
-                    ),
-                    itemCount: productList!.length,
-                    itemBuilder: (context, index) {
-                      final product = productList![index];
-                      return GestureDetector(
-                        onTap: () {
-                          // print(product.name);
-                          Navigator.pushNamed(
-                              context, ProductDetailScreen.routeName,
-                              arguments: product);
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 130,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 0.5,
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.only(left: 50),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        childAspectRatio: 1.4,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: productList!.length,
+                      itemBuilder: (context, index) {
+                        final product = productList![index];
+                        return GestureDetector(
+                          onTap: () {
+                            print(product.name);
+                            Navigator.pushNamed(
+                                context, ProductDetailScreen.routeName,
+                                arguments: product);
+                          },
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 130,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.network(product.images[0]),
                                   ),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(product.images[0]),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: const EdgeInsets.only(
+                                  left: 0,
+                                  top: 5,
+                                  right: 15,
                                 ),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              padding: const EdgeInsets.only(
-                                left: 0,
-                                top: 5,
-                                right: 15,
-                              ),
-                              child: Text(
-                                product.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                                child: Text(
+                                  product.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
                 ),
               ],
             ),

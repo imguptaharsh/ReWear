@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/global_variable.dart';
 import '../widgets/below_app_bar.dart';
-import '../widgets/order.dart';
+import '../widgets/orders.dart';
 import '../widgets/top_button.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -25,10 +25,11 @@ class AccountScreen extends StatelessWidget {
               Container(
                   alignment: Alignment.topLeft,
                   child: Image.asset(
-                    'assets/images/amazon_in.png',
+                    'assets/images/rewear3.png',
+                    // fit: BoxFit.fitHeight,
                     width: 120,
-                    height: 45,
-                    color: Colors.black,
+                    height: 40,
+                    // color: Colors.black,
                   )),
               Container(
                   padding: const EdgeInsets.only(left: 15, right: 15),

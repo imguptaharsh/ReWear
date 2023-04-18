@@ -1,6 +1,8 @@
 import 'package:e_com/features/account/widgets/account_button.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../services/account_services.dart';
+
 class TopButtons extends StatefulWidget {
   const TopButtons({super.key});
 
@@ -16,16 +18,18 @@ class _TopButtonsState extends State<TopButtons> {
         Row(
           children: [
             AccountButton(text: 'Your Order', onTap: () {}),
-            AccountButton(text: 'Log Out ', onTap: () {}),
+            AccountButton(
+                text: 'Log Out ',
+                onTap: () => AccountServices().logOut(context)),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(
           children: [
             AccountButton(text: 'Turn Seller', onTap: () {}),
-            AccountButton(text: 'Your WishList', onTap: () {})
+            AccountButton(text: 'Your WishList', onTap: () {}),
           ],
         )
       ],

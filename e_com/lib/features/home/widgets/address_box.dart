@@ -16,8 +16,8 @@ class AddressBox extends StatelessWidget {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.indigo,
-            Colors.cyan,
+            Color.fromARGB(255, 107, 59, 37),
+            Color.fromARGB(255, 140, 129, 122),
           ],
         ),
       ),

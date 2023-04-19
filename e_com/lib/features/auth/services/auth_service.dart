@@ -53,7 +53,7 @@ class AuthService {
       );
     } catch (e) {
       showSnackBar(context, e.toString());
-      print(e);
+      // print(e);
     }
   }
 
@@ -74,13 +74,14 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print(res.body);
+      // print(res.body);
       // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
+          // ignore: use_build_context_synchronously
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           // ignore: use_build_context_synchronously

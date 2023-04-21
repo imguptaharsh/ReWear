@@ -116,53 +116,57 @@ class _CartProductState extends State<CartProduct> {
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.black12,
                 ),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () => decreaseQuantity(product),
-                      child: Container(
-                        width: 35,
-                        height: 32,
-                        alignment: Alignment.center,
-                        child: const Icon(
-                          Icons.remove,
-                          size: 18,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black12, width: 1.5),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: Container(
-                        width: 35,
-                        height: 32,
-                        alignment: Alignment.center,
-                        child: Text(
-                          quantity.toString(),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => increaseQuantity(product),
-                      child: Container(
-                        width: 35,
-                        height: 32,
-                        alignment: Alignment.center,
-                        child: const Icon(
-                          Icons.add,
-                          size: 18,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                child: prodAdd(product, quantity),
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row prodAdd(Product product, quantity) {
+    return Row(
+      children: [
+        InkWell(
+          onTap: () => decreaseQuantity(product),
+          child: Container(
+            width: 35,
+            height: 32,
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.remove,
+              size: 18,
+              color: Colors.red,
+            ),
+          ),
+        ),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black12, width: 1.5),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(0),
+          ),
+          child: Container(
+            width: 35,
+            height: 32,
+            alignment: Alignment.center,
+            child: Text(
+              quantity.toString(),
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () => increaseQuantity(product),
+          child: Container(
+            width: 35,
+            height: 32,
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.add,
+              size: 18,
+              color: Colors.green,
+            ),
           ),
         ),
       ],

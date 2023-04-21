@@ -37,13 +37,7 @@ class _AddProductState extends State<AddProduct> {
     quantityController.dispose();
   }
 
-  List<String> productCategories = [
-    'Men',
-    'Women',
-    'kids',
-    'Shoes',
-    'Offers/Sales'
-  ];
+  List<String> productCategories = ['Men', 'Women', 'kids', 'Shoes'];
   void sellProduct() {
     if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
       adminServices.sellProduct(

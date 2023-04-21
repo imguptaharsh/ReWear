@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 String uri = 'http://10.0.9.227:3000';
 
 class GlobalVariables {
+  var kTextColor = const Color(0xFF535353);
+  var kTextLightColor = const Color(0xFFACACAC);
+  var kDefaultPaddin = 20.0;
   // COLORS
   static const appBarGradient = LinearGradient(
     // colors: [
@@ -21,7 +24,8 @@ class GlobalVariables {
     ],
   );
 
-  static const secondaryColor = Color.fromARGB(255, 107, 59, 37);
+  static const secondaryColor = Colors.green;
+  static const mainColor = Color.fromARGB(255, 107, 59, 37);
   static const backgroundColor = Colors.white;
   static const Color greyBackgroundCOlor = Color(0xffebecee);
   static const selectedNavBarColor = Color.fromARGB(255, 140, 129, 122);
@@ -48,16 +52,20 @@ class GlobalVariables {
       'image': 'assets/images/women.png',
     },
     {
-      'title': 'Kids',
+      'title': 'kids',
       'image': 'assets/images/kid.png',
     },
+    // {
+    //   'title': 'Kids',
+    //   'image': 'assets/images/kid.png',
+    // },
     {
       'title': 'Shoes',
       'image': 'assets/images/shoes.png',
     },
-    {
-      'title': 'Offers/Sales',
-      'image': 'assets/images/offer.png',
-    },
+    // {
+    //   'title': 'Offers/Sales',
+    //   'image': 'assets/images/offer.png',
+    // },
   ];
 }

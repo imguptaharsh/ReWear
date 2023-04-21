@@ -2,7 +2,6 @@ import 'package:e_com/features/home/widgets/carousel_image.dart';
 import 'package:e_com/features/home/widgets/deal_of_day.dart';
 import 'package:e_com/features/home/widgets/top_cat.dart';
 import 'package:e_com/provider/user_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

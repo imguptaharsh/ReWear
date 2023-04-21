@@ -1,5 +1,8 @@
 import 'package:e_com/features/account/widgets/account_button.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_com/features/cart/screen/cart_screen.dart.dart';
+import 'package:e_com/features/corbon/corbon.dart';
+import 'package:e_com/features/corbon/newtemp.dart';
+import 'package:flutter/material.dart';
 
 import '../services/account_services.dart';
 
@@ -11,13 +14,19 @@ class TopButtons extends StatefulWidget {
 }
 
 class _TopButtonsState extends State<TopButtons> {
+  void navigateToCorbon(String query) {
+    // Navigator.pushNamed(context, .routeName, arguments:
+    // query);
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           children: [
-            AccountButton(text: 'Your Order', onTap: () {}),
+            AccountButton(
+                text: 'Your Order',
+                onTap: () => const CarbonFootprintCalculator()),
             AccountButton(
                 text: 'Log Out ',
                 onTap: () => AccountServices().logOut(context)),
@@ -28,10 +37,18 @@ class _TopButtonsState extends State<TopButtons> {
         ),
         Row(
           children: [
-            AccountButton(text: 'Turn Seller', onTap: () {}),
+            AccountButton(
+                text: 'Corbon FootPrint',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => const CarbonFootprintCalculator(),
+                    ),
+                  );
+                }),
             AccountButton(text: 'Your WishList', onTap: () {}),
           ],
-        )
+        ),
       ],
     );
   }

@@ -1,7 +1,8 @@
+import 'package:e_com/common/widgets/loader.dart';
 import 'package:e_com/features/home/services/home_services.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/widgets/loader.dart';
+// import '../../../common/widgets/loader.dart';
 import '../../../constants/global_variable.dart';
 import '../../../models/product.dart';
 import '../../product_details/screen/product_details_screen.dart';
@@ -45,7 +46,7 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
             ),
           ),
           title: Text(
-            '${widget.category}',
+            widget.category,
             style: const TextStyle(
               color: Colors.black,
             ),
@@ -53,14 +54,15 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
         ),
       ),
       body: productList == null
-          ? const CircularProgressIndicator()
+          ? const Loader()
           : Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Keep Shopping For ${widget.category}",
+                    'Keep shopping for ${widget.category}',
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -69,58 +71,62 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
                 SizedBox(
                   height: 170,
                   child: GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.only(left: 50),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.4,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemCount: productList!.length,
-                      itemBuilder: (context, index) {
-                        final product = productList![index];
-                        return GestureDetector(
-                          onTap: () {
-                            print(product.name);
-                            Navigator.pushNamed(
-                                context, ProductDetailScreen.routeName,
-                                arguments: product);
-                          },
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 130,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black12,
-                                      width: 0.5,
-                                    ),
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 15),
+                    itemCount: productList!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      childAspectRatio: 1.4,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      final product = productList![index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailScreen.routeName,
+                            arguments: product,
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 0.5,
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.network(product.images[0]),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.network(
+                                    product.images[0],
                                   ),
                                 ),
                               ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: const EdgeInsets.only(
-                                  left: 0,
-                                  top: 5,
-                                  right: 15,
-                                ),
-                                child: Text(
-                                  product.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      }),
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: const EdgeInsets.only(
+                                left: 0,
+                                top: 5,
+                                right: 15,
+                              ),
+                              child: Text(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

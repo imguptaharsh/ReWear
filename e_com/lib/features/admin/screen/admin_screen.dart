@@ -2,6 +2,7 @@ import 'package:e_com/features/admin/screen/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variable.dart';
+import '../../account/services/account_services.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -48,27 +49,30 @@ class _AdminScreenState extends State<AdminScreen> {
               const Text("ReWear",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black)),
-              Container(
-                  alignment: Alignment.topLeft,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.admin_panel_settings_rounded),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Admin",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)),
-                    ],
-                  )
-                  // child: Image.asset(
-                  //   'assets/images/amazon_in.png',
-                  //   width: 120,
-                  //   height: 45,
-                  //   color: Colors.black,
-                  // )
-                  ),
+              GestureDetector(
+                onTap: () => AccountServices().logOut(context),
+                child: Container(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.logout_outlined),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text("Admin",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                      ],
+                    )
+                    // child: Image.asset(
+                    //   'assets/images/amazon_in.png',
+                    //   width: 120,
+                    //   height: 45,
+                    //   color: Colors.black,
+                    // )
+                    ),
+              ),
               // Container(
               //     padding: const EdgeInsets.only(left: 15, right: 5),
               //     child: Row(

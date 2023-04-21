@@ -49,6 +49,7 @@ class AccountScreen extends StatelessWidget {
       body: Column(
         children: const [
           BelowAppBar(),
+          // Profile(),
           SizedBox(height: 10),
           TopButtons(),
           SizedBox(height: 20),
@@ -57,4 +58,6 @@ class AccountScreen extends StatelessWidget {
       ),
     );
   }
+
+  // ignore: non_constant_identifier_names
 }

@@ -60,7 +60,7 @@ class AdminServices {
       );
     } catch (e) {
       showSnackBar(context, e.toString());
-      print(e.toString());
+      // print(e.toString());
     }
   }
 

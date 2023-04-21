@@ -171,6 +171,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 width: double.infinity,
                 style: ApplePayButtonStyle.whiteOutline,
                 type: ApplePayButtonType.buy,
+                // ignore: deprecated_member_use
                 paymentConfigurationAsset: 'applepay.json',
                 onPaymentResult: onApplePayResult,
                 paymentItems: paymentItems,

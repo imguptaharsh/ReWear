@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:e_com/constants/error_handling.dart';
 import 'package:e_com/constants/utils.dart';
+import 'package:e_com/features/admin/models/sales.dart';
 import 'package:e_com/models/product.dart';
 import 'package:e_com/provider/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ class AdminServices {
   }
 
   // for delete product
-  void delteProduct(
+  void deleteProduct(
       {required BuildContext context,
       required Product product,
       required VoidCallback onSuccess}) async {
@@ -173,12 +174,45 @@ class AdminServices {
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {
-          onSuccess();
-        },
+        onSuccess: () {},
       );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+  }
+
+  // Analytics Chart
+  Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Sales> sales = [];
+    int totalEarning = 0;
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/analytics'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            var response = jsonDecode(res.body);
+            totalEarning = response['totalEarnings'];
+            sales = [
+              Sales('Men', response['menEarnings']),
+              Sales('Women', response['womenEarnings']),
+              Sales('kids', response['kidsEarnings']),
+              Sales('Shoes', response['shoesEarnings']),
+              // Sales('Fashion', response['fashionEarnings']),
+            ];
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return {
+      'sales': sales,
+      'totalEarnings': totalEarning,
+    };
   }
 }

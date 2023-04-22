@@ -34,7 +34,7 @@ class _PostsScreenState extends State<PostsScreen> {
   }
 
   void deleteProduct(Product product, int index) {
-    adminServices.delteProduct(
+    adminServices.deleteProduct(
         context: context,
         product: product,
         onSuccess: () {

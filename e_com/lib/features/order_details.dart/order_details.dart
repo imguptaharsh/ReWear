@@ -1,4 +1,4 @@
-import 'package:e_com/models/user.dart';
+// import 'package:e_com/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,17 +33,18 @@ class _OrderDetailsState extends State<OrderDetails> {
     currentStep = widget.order.status;
   }
 
+  // only for admin
   void changeOrderStatus(int status) {
-    // adminServices.changeOrderStatus(
-    //   context: context,
-    //   status: status + 1,
-    //   order: widget.order,
-    //   onSuccess: () {
-    //     setState(() {
-    //       currentStep += 1;
-    //     });
-    //   },
-    // );
+    adminServices.changeOrderStatus(
+      context: context,
+      status: status + 1,
+      order: widget.order,
+      onSuccess: () {
+        setState(() {
+          currentStep += 1;
+        });
+      },
+    );
   }
 
   @override
@@ -213,8 +214,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                     if (user.type == 'admin') {
                       return CustomButton(
                         text: 'Done',
-                        onTap: () => {},
-                        // onTap: () => changeOrderStatus(details.currentStep),
+                        //onTap: () => {},
+                        onTap: () => changeOrderStatus(details.currentStep),
+                        color: GlobalVariables.mainColor,
                       );
                     }
                     return const SizedBox();
@@ -225,8 +227,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                       content: const Text(
                         'Your order is yet to be delivered',
                       ),
-                      isActive: currentStep >= 0,
-                      state: currentStep >= 0
+                      isActive: currentStep > 0,
+                      state: currentStep > 0
                           ? StepState.complete
                           : StepState.indexed,
                     ),

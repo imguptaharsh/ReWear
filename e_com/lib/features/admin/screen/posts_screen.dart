@@ -1,4 +1,5 @@
 import 'package:e_com/common/widgets/loader.dart';
+import 'package:e_com/constants/global_variable.dart';
 import 'package:e_com/features/account/widgets/single_product.dart';
 import 'package:e_com/features/admin/screen/add_product_screen.dart';
 import 'package:e_com/features/admin/services/admin_services.dart';
@@ -47,6 +48,7 @@ class _PostsScreenState extends State<PostsScreen> {
     return products == null
         ? const Loader()
         : Scaffold(
+            // backgroundColor: Color.fromARGB(255, 195, 190, 187),
             body: GridView.builder(
                 itemCount: products!.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -55,6 +57,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   final productData = products![index];
                   return Column(children: [
                     SizedBox(
+                        // color: Color.fromARGB(255, 195, 190, 187),
                         height: 140,
                         child: SingleProduct(
                           image: productData.images[0],
@@ -76,8 +79,10 @@ class _PostsScreenState extends State<PostsScreen> {
                   ]);
                 }),
             floatingActionButton: FloatingActionButton(
+                backgroundColor: GlobalVariables.selectedNavBarColor,
                 onPressed: navigateToAddProduct,
                 tooltip: 'Add a product!',
+                foregroundColor: Colors.white,
                 child: const Icon(Icons.add)),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,

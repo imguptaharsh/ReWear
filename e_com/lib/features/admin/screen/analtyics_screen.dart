@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../common/widgets/loader.dart';
 import '../models/sales.dart';
 // import '../widgets/category_products_chart.dart';
+import 'package:charts_flutter_new/flutter.dart' as charts;
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});

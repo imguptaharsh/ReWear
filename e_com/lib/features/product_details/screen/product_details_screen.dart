@@ -54,9 +54,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     const kTextColor = Color(0xFF535353);
+    Color colorTemp() {
+      if (myRating <= 1) {
+        return const Color.fromARGB(255, 253, 19, 3);
+      } else if (myRating <= 2) {
+        return const Color.fromARGB(255, 220, 72, 9);
+      } else if (myRating <= 3) {
+        return Colors.yellow;
+      } else if (myRating <= 4) {
+        return const Color.fromARGB(255, 209, 250, 3);
+      } else {
+        return Color.fromARGB(255, 6, 145, 11);
+      }
+    }
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 203, 200, 200),
+        backgroundColor: const Color.fromARGB(255, 203, 200, 200),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(
@@ -284,7 +297,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => const CartScreen(),
+                          ),
+                        ),
                         child: Text(
                           "Buy  Now".toUpperCase(),
                           style: const TextStyle(
@@ -312,8 +329,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-              itemBuilder: (context, _) =>
-                  Icon(Icons.star, color: Colors.amberAccent.shade700),
+              itemBuilder: (context, _) => Icon(
+                Icons.square,
+                color: colorTemp(),
+              ),
               // onRatingUpdate: (rating) {},
               onRatingUpdate: (rating) {
                 productDetailsServices.rateProduct(
@@ -322,7 +341,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   rating: rating,
                 );
               },
-            )
+            ),
+            const SizedBox(height: 50),
           ],
         )));
   }
@@ -366,9 +386,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               style: const TextStyle(color: kTextColor),
               children: [
                 // ignore: prefer_const_constructors
-                TextSpan(text: "Qunatity\n"),
+                TextSpan(text: "Qty\n"),
                 TextSpan(
-                  text: '${widget.product.quantity}',
+                  text: '${widget.product.quantity.toInt()}',
                   style: const TextStyle(
                     fontSize: 15,
                     // color: Colors.red,

@@ -105,6 +105,7 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget build(BuildContext context) {
     var address = context.watch<UserProvider>().user.address;
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 225, 222, 222),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(

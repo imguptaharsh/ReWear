@@ -2,6 +2,7 @@
 
 import 'package:e_com/constants/global_variable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../screen/category_deals_screen.dart';
 
@@ -15,14 +16,14 @@ class TopCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       // padding: EdgeInsets.only(top: ),
-
+      color: Colors.white,
       height: 60,
       child: ListView.builder(
         itemCount: GlobalVariables.categoryImages.length,
         scrollDirection: Axis.horizontal,
-        itemExtent: 75,
+        itemExtent: 95,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () => navigateToCategoryPage(

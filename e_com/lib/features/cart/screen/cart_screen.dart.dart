@@ -38,6 +38,7 @@ class _CartScreenState extends State<CartScreen> {
         .map((e) => sum += e['quantity'] * e['product']['price'] as int)
         .toList();
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 225, 222, 222),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(

@@ -202,6 +202,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         style: const TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold)),
                   ),
+                ],
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: Row(
+                children: [
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: RichText(
@@ -234,14 +241,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.all(4),
               color: Colors.white,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    widget.product.description,
-                    style: const TextStyle(height: 1.5),
+                  Expanded(
+                    child: Text(
+                      widget.product.description,
+                      style: const TextStyle(height: 1.5),
+                    ),
                   ),
                 ],
               ),
+              // height: 50,
             ),
 
             Container(
@@ -260,7 +270,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.add_shopping_cart),
+                      icon: const Icon(Icons.add_shopping_cart_outlined),
                       color: Colors.brown,
                       onPressed: addToCart,
                     ),

@@ -260,7 +260,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.card_travel),
+                      icon: const Icon(Icons.add_shopping_cart),
                       color: Colors.brown,
                       onPressed: addToCart,
                     ),

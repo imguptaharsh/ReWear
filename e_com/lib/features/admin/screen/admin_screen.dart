@@ -1,7 +1,9 @@
+import 'package:e_com/features/admin/screen/order_screen.dart';
 import 'package:e_com/features/admin/screen/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variable.dart';
+import '../../account/services/account_services.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -17,9 +19,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const PostsScreen(),
-    const Center(
-      child: Text('Cart Page'),
-    ),
+    const OrderScreen(),
     const Center(
       child: Text('Cart Page'),
     ),
@@ -45,30 +45,45 @@ class _AdminScreenState extends State<AdminScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("ReWear",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black)),
               Container(
                   alignment: Alignment.topLeft,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.admin_panel_settings_rounded),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Admin",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)),
-                    ],
-                  )
-                  // child: Image.asset(
-                  //   'assets/images/amazon_in.png',
-                  //   width: 120,
-                  //   height: 45,
-                  //   color: Colors.black,
-                  // )
-                  ),
+                  child: Image.asset(
+                    'assets/images/rewear3.png',
+                    // fit: BoxFit.fitHeight,
+                    width: 110,
+                    height: 35,
+                    // color: Colors.black,
+                  )),
+              // const Text("ReWear",
+              //     style: TextStyle(
+              //         fontWeight: FontWeight.bold, color: Colors.black)),
+              GestureDetector(
+                onTap: () => AccountServices().logOut(context),
+                child: Container(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      children: const [
+                        Text("Admin",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 195, 190, 187))),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(Icons.logout_outlined),
+                        SizedBox(
+                          width: 5,
+                        ),
+                      ],
+                    )
+                    // child: Image.asset(
+                    //   'assets/images/amazon_in.png',
+                    //   width: 120,
+                    //   height: 45,
+                    //   color: Colors.black,
+                    // )
+                    ),
+              ),
               // Container(
               //     padding: const EdgeInsets.only(left: 15, right: 5),
               //     child: Row(
@@ -88,7 +103,7 @@ class _AdminScreenState extends State<AdminScreen> {
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
-        selectedItemColor: GlobalVariables.secondaryColor,
+        selectedItemColor: GlobalVariables.mainColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,

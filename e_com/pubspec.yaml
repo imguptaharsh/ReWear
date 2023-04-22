@@ -47,6 +47,7 @@ dependencies:
   pay: ^1.1.0
   video_player: ^2.6.1
   chewie: ^1.4.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

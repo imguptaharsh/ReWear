@@ -10,6 +10,7 @@ import '../../search/screen/search_screen.dart';
 import '../widgets/cart_product.dart';
 
 class CartScreen extends StatefulWidget {
+  static const String routeName = '/cart-details';
   const CartScreen({super.key});
 
   @override

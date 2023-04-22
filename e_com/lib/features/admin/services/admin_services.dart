@@ -137,17 +137,23 @@ class AdminServices {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token,
       });
+
       // ignore: use_build_context_synchronously
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              orderList.add(
-                Order.fromJson(jsonEncode(jsonDecode(res.body)[i])),
-              );
-            }
-          });
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            orderList.add(
+              Order.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
@@ -155,12 +161,14 @@ class AdminServices {
   }
 
   // to change order status
-  void changeOrderStatus(
-      {required BuildContext context,
-      required int status,
-      required Order order,
-      required VoidCallback onSuccess}) async {
+  void changeOrderStatus({
+    required BuildContext context,
+    required int status,
+    required Order order,
+    required VoidCallback onSuccess,
+  }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/admin/change-order-status'),
@@ -173,11 +181,12 @@ class AdminServices {
           'status': status,
         }),
       );
+
       // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {},
+        onSuccess: onSuccess,
       );
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -195,21 +204,23 @@ class AdminServices {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token,
       });
+
       // ignore: use_build_context_synchronously
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            var response = jsonDecode(res.body);
-            totalEarning = response['totalEarnings'];
-            sales = [
-              Sales('Men', response['menEarnings']),
-              Sales('Women', response['womenEarnings']),
-              Sales('kids', response['kidsEarnings']),
-              Sales('Shoes', response['shoesEarnings']),
-              // Sales('Fashion', response['fashionEarnings']),
-            ];
-          });
+        response: res,
+        context: context,
+        onSuccess: () {
+          var response = jsonDecode(res.body);
+          totalEarning = response['totalEarnings'];
+          sales = [
+            Sales('Men', response['menEarnings']),
+            Sales('Women', response['womenEarnings']),
+            Sales('kids', response['kidsEarnings']),
+            Sales('Shoes', response['shoesEarnings']),
+            // Sales('Fashion', response['fashionEarnings']),
+          ];
+        },
+      );
     } catch (e) {
       showSnackBar(context, e.toString());
     }

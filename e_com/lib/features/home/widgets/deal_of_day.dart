@@ -49,11 +49,11 @@ class _DealOfDayState extends State<DealOfDay> {
                       alignment: Alignment.topLeft,
                       padding: const EdgeInsets.all(8),
                       child: const Text(
-                        'Deal of the day',
+                        'Green Pick of the Day',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 107, 59, 37),
+                          color: Colors.green,
                         ),
                       ),
                     ),
@@ -62,52 +62,84 @@ class _DealOfDayState extends State<DealOfDay> {
                       height: 235,
                       fit: BoxFit.fitHeight,
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 15),
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        '\$100',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      padding:
-                          const EdgeInsets.only(left: 15, top: 5, right: 40),
-                      child: const Text(
-                        'Sustainable',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: product!.images
-                            .map(
-                              (e) => Image.network(
-                                e,
-                                fit: BoxFit.fitWidth,
-                                width: 100,
-                                height: 100,
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                      ).copyWith(left: 15),
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'See all deals',
-                        style: TextStyle(
-                          color: Colors.cyan[800],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 15),
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            product!.name,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Deal Price: ',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: '₹${product!.price}',
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    const SizedBox(
+                      height: 100,
+                    )
+                    // Container(
+                    //   alignment: Alignment.topLeft,
+                    //   padding:
+                    //       const EdgeInsets.only(left: 15, top: 5, right: 40),
+                    //   child: const Text(
+                    //     'Sustainable',
+                    //     maxLines: 2,
+                    //     overflow: TextOverflow.ellipsis,
+                    //   ),
+                    // ),
+                    // SingleChildScrollView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: product!.images
+                    //         .map(
+                    //           (e) => Image.network(
+                    //             e,
+                    //             fit: BoxFit.fitWidth,
+                    //             width: 100,
+                    //             height: 100,
+                    //           ),
+                    //         )
+                    //         .toList(),
+                    //   ),
+                    // ),
+                    // Container(
+                    //   padding: const EdgeInsets.symmetric(
+                    //     vertical: 15,
+                    //   ).copyWith(left: 15),
+                    //   alignment: Alignment.topLeft,
+                    //   child: Text(
+                    //     'See all deals',
+                    //     style: TextStyle(
+                    //       color: Colors.cyan[800],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               );

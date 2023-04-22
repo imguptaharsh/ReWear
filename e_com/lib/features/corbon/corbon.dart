@@ -115,7 +115,13 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Your carbon footprint is ${carbonFootprint.toStringAsFixed(2)} metric tons of CO2 equivalent.',
+                'Your carbon footprint is ',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '${carbonFootprint.toStringAsFixed(2)} metric tons of CO2 equivalent.',
               ),
             ),
           ],

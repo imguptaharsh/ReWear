@@ -1,3 +1,4 @@
+import 'package:e_com/common/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/global_variable.dart';
@@ -105,25 +106,47 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
                 },
               ),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: ElevatedButton(
+            //     onPressed: calculateCarbonFootprint,
+            //     child: const Text('Calculate'),
+            //   ),
+            // ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: calculateCarbonFootprint,
-                child: const Text('Calculate'),
+                padding: const EdgeInsets.all(16.0),
+                child: CustomButton(
+                  text: 'Calculate',
+                  onTap: calculateCarbonFootprint,
+                  color: const Color.fromARGB(255, 107, 59, 37),
+                )),
+            if (carbonFootprint != 0)
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Your carbon footprint ',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Your carbon footprint is ',
+            if (carbonFootprint != 0)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  carbonFootprint.toStringAsFixed(2),
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                '${carbonFootprint.toStringAsFixed(2)} metric tons of CO2 equivalent.',
+            // ignore: prefer_const_constructors
+            if (carbonFootprint != 0)
+              const Padding(
+                padding: EdgeInsets.all(2.0),
+                // ignore: prefer_const_constructors
+                child: Text(
+                  'metric tons of CO2 equivalent.',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
               ),
-            ),
           ],
         ),
       ),

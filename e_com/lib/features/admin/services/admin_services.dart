@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:dio/dio.dart';
 import 'package:e_com/constants/error_handling.dart';
 import 'package:e_com/constants/utils.dart';
 import 'package:e_com/features/admin/models/sales.dart';
@@ -64,9 +65,22 @@ class AdminServices {
           Navigator.pop(context);
         },
       );
+      // ignore: nullable_type_in_catch_clause
+    } on DioError catch (e) {
+      // ignore: todo
+      // TODO: Error handling
+      if (e.response != null) {
+        // ignore: avoid_print
+        print(e.toString());
+      } else {
+        // print(e.request);
+        // ignore: avoid_print
+        print(e.toString());
+      }
     } catch (e) {
       showSnackBar(context, e.toString());
-      // print(e.toString());
+      // ignore: avoid_print
+      print(e.toString());
     }
   }
 
@@ -130,7 +144,7 @@ class AdminServices {
   // fetching orders
   Future<List<Order>> fetchAllOrders(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Order> orderList = [];
+    List<Order>? orderList = [];
     try {
       http.Response res =
           await http.get(Uri.parse('$uri/admin/get-orders'), headers: {
@@ -163,7 +177,7 @@ class AdminServices {
   // to change order status
   void changeOrderStatus({
     required BuildContext context,
-    required int status,
+    required int? status,
     required Order order,
     required VoidCallback onSuccess,
   }) async {
@@ -196,8 +210,8 @@ class AdminServices {
   // Analytics Chart
   Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Sales> sales = [];
-    int totalEarning = 0;
+    List<Sales>? sales = [];
+    int? totalEarning = 0;
     try {
       http.Response res =
           await http.get(Uri.parse('$uri/admin/analytics'), headers: {

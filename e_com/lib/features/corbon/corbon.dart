@@ -112,8 +112,8 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
                 child: const Text('Calculate'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Text(
                 'Your carbon footprint is ',
               ),

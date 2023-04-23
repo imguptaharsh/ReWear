@@ -33,6 +33,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 225, 222, 222),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
@@ -74,27 +75,8 @@ class _AdminScreenState extends State<AdminScreen> {
                           width: 5,
                         ),
                       ],
-                    )
-                    // child: Image.asset(
-                    //   'assets/images/amazon_in.png',
-                    //   width: 120,
-                    //   height: 45,
-                    //   color: Colors.black,
-                    // )
-                    ),
+                    )),
               ),
-              // Container(
-              //     padding: const EdgeInsets.only(left: 15, right: 5),
-              //     child: Row(
-              //       children: const [
-              //         Padding(
-              //           padding: EdgeInsets.only(right: 15),
-              //           child: Icon(Icons.notifications_outlined),
-              //         ),
-              //         // Icon(Icons.admin_panel_settings_rounded),
-              //       ],
-              //     ),
-              // )
             ],
           ),
         ),

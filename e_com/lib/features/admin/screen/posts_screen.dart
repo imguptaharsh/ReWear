@@ -58,7 +58,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   return Column(children: [
                     SizedBox(
                         // color: Color.fromARGB(255, 195, 190, 187),
-                        height: 140,
+                        height: 120,
                         child: SingleProduct(
                           image: productData.images[0],
                         )),

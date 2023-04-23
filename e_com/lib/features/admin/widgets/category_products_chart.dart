@@ -17,7 +17,7 @@ class CategoryProductsChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return charts.BarChart(
       seriesList,
-      animate: false,
+      animate: true,
     );
   }
 }

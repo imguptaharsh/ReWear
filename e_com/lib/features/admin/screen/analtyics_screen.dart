@@ -1,3 +1,4 @@
+import 'package:e_com/constants/global_variable.dart';
 import 'package:e_com/features/admin/services/admin_services.dart';
 import 'package:flutter/material.dart';
 import '../../../common/widgets/loader.dart';
@@ -32,29 +33,53 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // double height = MediaQuery.of(context).size.height;
+    // var padding = MediaQuery.of(context).padding;
+    // double newheight = height - padding.top;
+
     return earnings == null || totalSales == null
         ? const Loader()
-        : Column(
-            children: [
-              Text(
-                '\$$totalSales',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        : Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // ignore: prefer_const_constructors
+                    Text(
+                      'Total Selling:',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '₹$totalSales',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: 300,
-                child: CategoryProductsChart(seriesList: [
-                  charts.Series(
-                    id: 'Sales',
-                    data: earnings!,
-                    domainFn: (Sales sales, _) => sales.label,
-                    measureFn: (Sales sales, _) => sales.earning,
-                  ),
-                ]),
-              )
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 500,
+                  child: CategoryProductsChart(seriesList: [
+                    charts.Series(
+                      id: 'Sales',
+                      data: earnings!,
+                      colorFn: (_, __) => charts.Color.fromHex(code: '#6B3B25'),
+                      domainFn: (Sales sales, _) => sales.label,
+                      measureFn: (Sales sales, _) => sales.earning,
+                    ),
+                  ]),
+                )
+              ],
+            ),
           );
   }
 }

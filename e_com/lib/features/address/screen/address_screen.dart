@@ -1,7 +1,9 @@
+import 'package:e_com/common/widgets/custom_button.dart';
 import 'package:e_com/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../../common/widgets/custom_widgets.dart';
 import '../../../constants/global_variable.dart';
@@ -18,12 +20,76 @@ class AddressScreen extends StatefulWidget {
 }
 
 class _AddressScreenState extends State<AddressScreen> {
+  //RAZORPAY SETUP******************************************/
+  Razorpay razorpay = Razorpay();
+  //Opening razorpay
+  void openCheckout() {
+    var options = {
+      "key": "rzp_test_kts0naJ8Vehrog",
+      "amount": num.parse(widget.totalAmount) * 100,
+      "name": "ReWear",
+      "description": "TOTAL AMOUNT",
+      "prefill": {
+        "contact": "9898989898",
+        "email": "test@test.com",
+      },
+      "external": {
+        "wallets": ["paytm"],
+      }
+    };
+
+    try {
+      razorpay.open(options);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  //Handling results
+
+  void handlePaymentSuccess(PaymentSuccessResponse res) {
+    try {
+      if (Provider.of<UserProvider>(context, listen: false)
+          .user
+          .address
+          .isEmpty) {
+        addressServices.saveUserAddress(
+            context: context, address: addressToBeUsed);
+      }
+
+      addressServices.placeOrder(
+        context: context,
+        address: addressToBeUsed,
+        totalSum: double.parse(widget.totalAmount),
+      );
+
+      paymentItems.add(PaymentItem(
+          amount: widget.totalAmount,
+          label: 'Total Amount',
+          status: PaymentItemStatus.final_price));
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+
+    showSnackBar(context, "ORDER SUCCESSFUL");
+  }
+
+  void handlePaymentError(PaymentFailureResponse res) {
+    showSnackBar(context, "ORDER FAILURE");
+  }
+
+  void handleExternalWallet(ExternalWalletResponse res) {
+    showSnackBar(context, "EXTERNAL WALLET");
+  }
+
+  //****************************************************** */
+
+  //Variables
   final TextEditingController flatBuildingController = TextEditingController();
   final TextEditingController areaController = TextEditingController();
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
-
   String addressToBeUsed = "";
   List<PaymentItem> paymentItems = [];
   final AddressServices addressServices = AddressServices();
@@ -38,6 +104,11 @@ class _AddressScreenState extends State<AddressScreen> {
         status: PaymentItemStatus.final_price,
       ),
     );
+    razorpay = Razorpay();
+
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccess);
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
+    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
   }
 
   @override
@@ -47,6 +118,7 @@ class _AddressScreenState extends State<AddressScreen> {
     areaController.dispose();
     pincodeController.dispose();
     cityController.dispose();
+    razorpay.clear();
   }
 
   void onApplePayResult(res) {
@@ -105,10 +177,14 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget build(BuildContext context) {
     var address = context.watch<UserProvider>().user.address;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 225, 222, 222),
+      backgroundColor: const Color.fromARGB(255, 252, 250, 235),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(
+            title: const Text(
+              'Address',
+              style: TextStyle(color: Colors.black),
+            ),
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: GlobalVariables.appBarGradient,
@@ -187,12 +263,32 @@ class _AddressScreenState extends State<AddressScreen> {
                 paymentConfigurationAsset: 'gpay.json',
                 onPaymentResult: onGooglePayResult,
                 paymentItems: paymentItems,
-                type: GooglePayButtonType.buy,
+                type: GooglePayButtonType.pay,
                 margin: const EdgeInsets.only(top: 15),
                 loadingIndicator: const Center(
                   child: CircularProgressIndicator(),
                 ),
               ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     payPressed(address);
+              //     openCheckout();
+              //   },
+              //   child: const Text(
+              //     "RAZORPAY",
+              //     style: TextStyle(color: Colors.black),
+              //   ),
+              // ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomButton(
+                  text: "RAZORPAY",
+                  onTap: () {
+                    payPressed(address);
+                    openCheckout();
+                  },
+                  color: GlobalVariables.mainColor)
             ],
           ),
         ),

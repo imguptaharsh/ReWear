@@ -1,11 +1,13 @@
 import 'package:e_com/common/widgets/custom_button.dart';
+// import 'package:e_com/common/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/global_variable.dart';
 
 class CarbonFootprintCalculator extends StatefulWidget {
-  static const String routeName = '/corbon';
   const CarbonFootprintCalculator({super.key});
+
+  static const String routeName = '/corbon';
 
   @override
   // ignore: library_private_types_in_public_api
@@ -14,12 +16,13 @@ class CarbonFootprintCalculator extends StatefulWidget {
 }
 
 class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
+  double carbonFootprint = 0.0;
   // Define variables to store user inputs
   double electricity = 0.0;
+
   double gas = 0.0;
   double waste = 0.0;
   double water = 0.0;
-  double carbonFootprint = 0.0;
 
   // Define a function to calculate the carbon footprint
   void calculateCarbonFootprint() {
@@ -32,6 +35,7 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 252, 250, 235),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
@@ -46,7 +50,7 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
           ),
           // ignore: prefer_const_constructors
           title: Text(
-            'dfgsg',
+            'Carbon Footprint',
             style: const TextStyle(
               color: Colors.black,
             ),
@@ -61,8 +65,15 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
               child: TextField(
                 // ignore: prefer_const_constructors
                 decoration: InputDecoration(
-                  labelText: 'Electricity (kWh)',
-                ),
+                    labelText: 'Electricity (kWh)',
+                    border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    )),
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    ))),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   electricity = double.tryParse(value) ?? 0.0;
@@ -73,8 +84,15 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: const InputDecoration(
-                  labelText: 'Gas (therms)',
-                ),
+                    labelText: 'Gas (therms)',
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    )),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    ))),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   gas = double.tryParse(value) ?? 0.0;
@@ -86,8 +104,15 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
               child: TextField(
                 // ignore: prefer_const_constructors
                 decoration: InputDecoration(
-                  labelText: 'Waste (lbs)',
-                ),
+                    labelText: 'Waste (lbs)',
+                    border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    )),
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    ))),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   waste = double.tryParse(value) ?? 0.0;
@@ -98,8 +123,15 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: const InputDecoration(
-                  labelText: 'Water (gal)',
-                ),
+                    labelText: 'Water (gal)',
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    )),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                    ))),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   water = double.tryParse(value) ?? 0.0;
@@ -118,7 +150,7 @@ class _CarbonFootprintCalculatorState extends State<CarbonFootprintCalculator> {
                 child: CustomButton(
                   text: 'Calculate',
                   onTap: calculateCarbonFootprint,
-                  color: const Color.fromARGB(255, 107, 59, 37),
+                  color: GlobalVariables.mainColor,
                 )),
             if (carbonFootprint != 0)
               const Padding(

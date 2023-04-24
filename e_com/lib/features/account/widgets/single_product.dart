@@ -13,16 +13,14 @@ class SingleProduct extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black12,
-            width: 1.5,
-          ),
           borderRadius: BorderRadius.circular(5),
-          color: Colors.white,
+          color: const Color.fromARGB(255, 255, 246, 168),
         ),
-        child: Container(
-          width: 180,
-          padding: const EdgeInsets.all(10),
+        child: Card(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 10,
           child: Image.network(
             image,
             fit: BoxFit.fitHeight,

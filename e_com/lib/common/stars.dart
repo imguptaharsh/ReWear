@@ -27,6 +27,6 @@ class Stars extends StatelessWidget {
         rating: rating,
         itemSize: 15,
         itemBuilder: (context, index) =>
-            const Icon(Icons.square, color: Color.fromARGB(255, 236, 162, 13)));
+            const Icon(Icons.star, color: Color.fromARGB(255, 251, 168, 3)));
   }
 }

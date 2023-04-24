@@ -39,7 +39,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
     return earnings == null || totalSales == null
         ? const Loader()
-        : Padding(
+        : Container(
+            color: const Color.fromARGB(255, 252, 250, 235),
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
@@ -72,7 +73,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                     charts.Series(
                       id: 'Sales',
                       data: earnings!,
-                      colorFn: (_, __) => charts.Color.fromHex(code: '#6B3B25'),
+                      colorFn: (_, __) => charts.Color.fromHex(code: '#F1C300'),
                       domainFn: (Sales sales, _) => sales.label,
                       measureFn: (Sales sales, _) => sales.earning,
                     ),

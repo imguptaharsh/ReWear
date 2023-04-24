@@ -13,8 +13,9 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 225, 222, 222),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          elevation: 15,
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: GlobalVariables.appBarGradient,
@@ -48,7 +49,7 @@ class AccountScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        color: const Color.fromARGB(255, 225, 222, 222),
+        color: const Color.fromARGB(255, 251, 248, 219),
         child: Column(
           children: const [
             BelowAppBar(),

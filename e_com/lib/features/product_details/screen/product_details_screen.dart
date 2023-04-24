@@ -64,12 +64,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       } else if (myRating <= 4) {
         return const Color.fromARGB(255, 209, 250, 3);
       } else {
-        return Color.fromARGB(255, 6, 145, 11);
+        return const Color.fromARGB(255, 6, 145, 11);
       }
     }
 
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 203, 200, 200),
+        backgroundColor: const Color.fromARGB(255, 250, 246, 211),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(
@@ -151,6 +151,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const Text('Product id:'),
                     Text(
                       widget.product.id!,
                     ),
@@ -251,7 +252,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Container(color: Colors.white, child: ColorBar(kTextColor)),
 
             Container(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(10),
               color: Colors.white,
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -279,12 +280,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
-                        color: Colors.brown,
+                        color: Colors.yellow,
                       ),
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.add_shopping_cart_outlined),
-                      color: Colors.brown,
+                      color: Colors.black,
                       onPressed: addToCart,
                     ),
                   ),
@@ -293,7 +294,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: GlobalVariables.secondaryColor,
+                          foregroundColor: Colors.green,
+                          backgroundColor: GlobalVariables.mainColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
                         ),
@@ -307,7 +309,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -330,7 +332,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, _) => Icon(
-                Icons.square,
+                Icons.circle,
                 color: colorTemp(),
               ),
               // onRatingUpdate: (rating) {},
@@ -407,6 +409,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 class ColorDot extends StatelessWidget {
   final Color color;
   final bool isSelected;
+  // ignore: use_key_in_widget_constructors
   const ColorDot({
     // required Key key,
     required this.color,

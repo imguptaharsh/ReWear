@@ -1,5 +1,6 @@
 import 'package:e_com/features/account/widgets/single_product.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../common/widgets/loader.dart';
 import '../../../constants/global_variable.dart';
@@ -39,9 +40,7 @@ class _OrdersState extends State<Orders> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(
-                      left: 15,
-                    ),
+                    padding: const EdgeInsets.only(left: 15, bottom: 15),
                     child: const Text(
                       'Your Orders',
                       style: TextStyle(
@@ -51,15 +50,14 @@ class _OrdersState extends State<Orders> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.only(
-                      right: 15,
-                    ),
+                    padding: const EdgeInsets.only(right: 15, bottom: 15),
                     // ignore: prefer_const_constructors
                     child: Text(
                       'See all',
                       // ignore: prefer_const_constructors
                       style: TextStyle(
-                        color: GlobalVariables.selectedNavBarColor,
+                        fontSize: 15,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -67,10 +65,11 @@ class _OrdersState extends State<Orders> {
               ),
               // display orders
               Container(
-                height: 170,
+                height: 230,
+                width: double.infinity,
                 padding: const EdgeInsets.only(
                   left: 10,
-                  top: 20,
+                  top: 10,
                   right: 0,
                 ),
                 child: ListView.builder(

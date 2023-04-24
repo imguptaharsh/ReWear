@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 252, 250, 235),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(55),
         child: AppBar(
@@ -85,24 +86,21 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         //  scrollDirection: Axis.vertical
-        child: Container(
-          color: const Color.fromARGB(255, 225, 222, 222),
-          child: Column(
-            children: const [
-              // SizedBox(
-              //   height: 10,
-              // ),
-              AddressBox(),
-              TopCategories(),
+        child: Column(
+          children: const [
+            // SizedBox(
+            //   height: 10,
+            // ),
+            AddressBox(),
+            TopCategories(),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            CarouselImage(),
 
-              // SizedBox(
-              //   height: 10,
-              // ),
-              CarouselImage(),
-              DealOfDay(),
-              // AddressBox(),
-            ],
-          ),
+            DealOfDay(),
+            // AddressBox(),
+          ],
         ),
       ),
       // const AddressBox(),

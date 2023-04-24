@@ -23,10 +23,13 @@ class BelowAppBar extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  const CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: NetworkImage(
-                        "https://www.w3schools.com/howto/img_avatar.png"),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      radius: 50.0,
+                      backgroundImage: NetworkImage(
+                          "https://www.w3schools.com/howto/img_avatar.png"),
+                    ),
                   ),
                   const SizedBox(height: 10.0),
                   Text(

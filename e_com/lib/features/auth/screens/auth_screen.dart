@@ -55,7 +55,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalVariables.greyBackgroundCOlor,
+      backgroundColor: const Color.fromARGB(255, 252, 250, 235),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -73,7 +73,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ListTile(
                   tileColor: _auth == Auth.signup
                       ? GlobalVariables.backgroundColor
-                      : GlobalVariables.greyBackgroundCOlor,
+                      : const Color.fromARGB(255, 252, 250, 235),
                   title: const Text(
                     'Create Account',
                     style: TextStyle(
@@ -130,7 +130,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ListTile(
                   tileColor: _auth == Auth.signin
                       ? GlobalVariables.backgroundColor
-                      : GlobalVariables.greyBackgroundCOlor,
+                      : const Color.fromARGB(255, 252, 250, 235),
                   title: const Text(
                     'Sign-In.',
                     style: TextStyle(

@@ -80,7 +80,7 @@ adminRouter.get('/admin/get-products', admin,async(req,res)=>{
       }
       // CATEGORY WISE ORDER FETCHING
     let menEarnings = await fetchCategoryWiseProduct('Men');
-    let womemEarnings = await fetchCategoryWiseProduct('Women');
+    let womenEarnings = await fetchCategoryWiseProduct('Women');
     let kidsEarnings = await fetchCategoryWiseProduct('kids');
     let shoesEarnings = await fetchCategoryWiseProduct('Shoes');
     // let fashionEarnings = await fetchCategoryWiseProduct("Fashion");
@@ -88,7 +88,7 @@ adminRouter.get('/admin/get-products', admin,async(req,res)=>{
     let earnings = {
       totalEarnings,
       menEarnings,
-      womemEarnings,
+      womenEarnings,
       kidsEarnings,
       shoesEarnings,
       // fashionEarnings,

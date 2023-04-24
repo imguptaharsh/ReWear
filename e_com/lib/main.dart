@@ -3,6 +3,7 @@
 
 import 'package:e_com/constants/global_variable.dart';
 import 'package:e_com/features/admin/screen/admin_screen.dart';
+import 'package:e_com/features/admin/services/admin_services.dart';
 import 'package:e_com/provider/user_provider.dart';
 import 'package:e_com/router.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: (settings) => generateRoute(settings),
-        // home: const AdminScreen(),
+        // home: const BottomBar());
         home: Provider.of<UserProvider>(context).user.token.isNotEmpty
             ? Provider.of<UserProvider>(context).user.type == 'user'
                 ? const BottomBar()

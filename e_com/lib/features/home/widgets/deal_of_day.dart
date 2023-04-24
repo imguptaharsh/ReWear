@@ -47,7 +47,8 @@ class _DealOfDayState extends State<DealOfDay> {
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: const EdgeInsets.all(8),
+                      padding:
+                          const EdgeInsets.only(left: 40, top: 20, bottom: 10),
                       child: const Text(
                         'Green Pick of the Day',
                         style: TextStyle(
@@ -57,32 +58,38 @@ class _DealOfDayState extends State<DealOfDay> {
                         ),
                       ),
                     ),
-                    Image.network(
-                      product!.images[0],
-                      height: 235,
-                      fit: BoxFit.fitHeight,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Image.network(
+                          product!.images[0],
+                          height: 265,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        product!.name,
+                        style: const TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w600),
+                      ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 15),
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            product!.name,
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
                         Padding(
-                          padding: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.only(left: 20, top: 5),
                           child: RichText(
                             text: TextSpan(
-                              text: 'Deal Price: ',
+                              text: 'Deal Price:  ',
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 22,
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                               ),
                               children: [
                                 TextSpan(
@@ -90,7 +97,7 @@ class _DealOfDayState extends State<DealOfDay> {
                                   style: const TextStyle(
                                     fontSize: 22,
                                     color: Colors.red,
-                                    fontWeight: FontWeight.w300,
+                                    fontWeight: FontWeight.w800,
                                   ),
                                 ),
                               ],

@@ -10,10 +10,17 @@ class CarouselImage extends StatelessWidget {
     return CarouselSlider(
       items: GlobalVariables.carouselImages.map((i) {
         return Builder(
-            builder: (BuildContext context) => Image.asset(
-                  i,
-                  fit: BoxFit.cover,
-                  height: 200,
+            builder: (BuildContext context) => Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  child: Card(
+                    child: Image.asset(
+                      i,
+                      fit: BoxFit.cover,
+                      height: 200,
+                    ),
+                  ),
                 ));
       }).toList(),
       options: CarouselOptions(

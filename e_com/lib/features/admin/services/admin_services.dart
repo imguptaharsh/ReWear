@@ -30,7 +30,7 @@ class AdminServices {
     try {
       final cloudinary = CloudinaryPublic('dl2ny1j0y', 'c6qkjndh');
       List<String> imageUrls = [];
-
+      // var dio = Dio();
       for (int i = 0; i < images.length; i++) {
         CloudinaryResponse res = await cloudinary.uploadFile(
           CloudinaryFile.fromFile(
@@ -40,6 +40,7 @@ class AdminServices {
         );
         imageUrls.add(res.secureUrl);
       }
+
       Product product = Product(
         name: name,
         description: description,

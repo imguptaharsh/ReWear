@@ -51,8 +51,9 @@ class _OrderDetailsState extends State<OrderDetails> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 252, 250, 235),
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(55),
+          preferredSize: const Size.fromHeight(60),
           child: AppBar(
             flexibleSpace: Container(
               decoration: const BoxDecoration(
@@ -60,14 +61,14 @@ class _OrderDetailsState extends State<OrderDetails> {
               ),
             ),
             title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                       height: 42,
-                      margin: const EdgeInsets.only(left: 15),
+                      //margin: const EdgeInsets.only(left: 15),
                       child: Material(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(25),
                           elevation: 1,
                           child: TextFormField(
                               onFieldSubmitted: navigateToSearchScreen,
@@ -126,22 +127,24 @@ class _OrderDetailsState extends State<OrderDetails> {
               ),
               Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black12,
-                    ),
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.black45, width: 1.5),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Order Date:      ${DateFormat().format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                            widget.order.orderedAt),
-                      )}'),
-                      Text('Order ID:          ${widget.order.id}'),
-                      Text('Order Total:      \$${widget.order.totalPrice}'),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Order Date:      ${DateFormat().format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                              widget.order.orderedAt),
+                        )}'),
+                        Text('Order ID:          ${widget.order.id}'),
+                        Text('Order Total:     ${widget.order.totalPrice} ₹'),
+                      ],
+                    ),
                   )),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               const Text(
                 'Purchase Details',
                 style: TextStyle(
@@ -149,52 +152,67 @@ class _OrderDetailsState extends State<OrderDetails> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black12,
+              const SizedBox(height: 13),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: Colors.black45,
+                      width: 1.5,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      for (int i = 0; i < widget.order.products.length; i++)
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Container(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Image.network(
+                                  widget.order.products[i].images[0],
+                                  height: 120,
+                                  width: 120,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.order.products[i].name.toUpperCase(),
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    'Qty: ${widget.order.quantity[i]}',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    for (int i = 0; i < widget.order.products.length; i++)
-                      Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.network(
-                            widget.order.products[i].images[0],
-                            height: 120,
-                            width: 120,
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.order.products[i].name,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  'Qty: ${widget.order.quantity[i]}',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                  ],
-                ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               const Text(
                 'Tracking',
                 style: TextStyle(
@@ -202,10 +220,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: Colors.black12,
+                    color: Colors.black45,
+                    width: 1.5,
                   ),
                 ),
                 child: Stepper(

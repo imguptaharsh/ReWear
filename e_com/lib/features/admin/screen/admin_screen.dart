@@ -33,6 +33,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
@@ -65,7 +66,7 @@ class _AdminScreenState extends State<AdminScreen> {
                         Text("Admin",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 195, 190, 187))),
+                                color: Colors.black)),
                         SizedBox(
                           width: 10,
                         ),
@@ -74,27 +75,8 @@ class _AdminScreenState extends State<AdminScreen> {
                           width: 5,
                         ),
                       ],
-                    )
-                    // child: Image.asset(
-                    //   'assets/images/amazon_in.png',
-                    //   width: 120,
-                    //   height: 45,
-                    //   color: Colors.black,
-                    // )
-                    ),
+                    )),
               ),
-              // Container(
-              //     padding: const EdgeInsets.only(left: 15, right: 5),
-              //     child: Row(
-              //       children: const [
-              //         Padding(
-              //           padding: EdgeInsets.only(right: 15),
-              //           child: Icon(Icons.notifications_outlined),
-              //         ),
-              //         // Icon(Icons.admin_panel_settings_rounded),
-              //       ],
-              //     ),
-              // )
             ],
           ),
         ),
@@ -102,7 +84,7 @@ class _AdminScreenState extends State<AdminScreen> {
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
-        selectedItemColor: GlobalVariables.mainColor,
+        selectedItemColor: Colors.black,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,
@@ -116,7 +98,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   border: Border(
                       top: BorderSide(
                 color: _page == 0
-                    ? GlobalVariables.selectedNavBarColor
+                    ? GlobalVariables.mainColor
                     : GlobalVariables.backgroundColor,
                 width: bottomBarBorderWidth,
               ))),
@@ -132,7 +114,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   border: Border(
                       top: BorderSide(
                 color: _page == 1
-                    ? GlobalVariables.selectedNavBarColor
+                    ? GlobalVariables.mainColor
                     : GlobalVariables.backgroundColor,
                 width: bottomBarBorderWidth,
               ))),
@@ -150,7 +132,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   border: Border(
                     top: BorderSide(
                       color: _page == 2
-                          ? GlobalVariables.selectedNavBarColor
+                          ? GlobalVariables.mainColor
                           : GlobalVariables.backgroundColor,
                       width: bottomBarBorderWidth,
                     ),

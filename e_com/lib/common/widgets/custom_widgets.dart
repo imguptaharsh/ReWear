@@ -13,25 +13,31 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-          hintText: hintText,
-          border: const OutlineInputBorder(
-              borderSide: BorderSide(
-            color: Colors.black38,
-          )),
-          enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-            color: Colors.black38,
-          ))),
-      validator: (val) {
-        if (val == null || val.isEmpty) {
-          return 'Enter your $hintText';
-        }
-        return null;
-      },
-      maxLines: maxLines,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Card(
+        color: const Color.fromARGB(255, 244, 237, 180),
+        child: TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+              hintText: hintText,
+              border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                color: Colors.black12,
+              )),
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                color: Colors.black12,
+              ))),
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return 'Enter your $hintText';
+            }
+            return null;
+          },
+          maxLines: maxLines,
+        ),
+      ),
     );
   }
 }

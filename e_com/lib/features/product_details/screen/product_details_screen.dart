@@ -54,9 +54,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     const kTextColor = Color(0xFF535353);
+    Color colorTemp() {
+      if (myRating <= 1) {
+        return const Color.fromARGB(255, 253, 19, 3);
+      } else if (myRating <= 2) {
+        return const Color.fromARGB(255, 220, 72, 9);
+      } else if (myRating <= 3) {
+        return Colors.yellow;
+      } else if (myRating <= 4) {
+        return const Color.fromARGB(255, 209, 250, 3);
+      } else {
+        return const Color.fromARGB(255, 6, 145, 11);
+      }
+    }
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 203, 200, 200),
+        backgroundColor: const Color.fromARGB(255, 250, 246, 211),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(
@@ -138,6 +151,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const Text('Product id:'),
                     Text(
                       widget.product.id!,
                     ),
@@ -238,7 +252,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Container(color: Colors.white, child: ColorBar(kTextColor)),
 
             Container(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(10),
               color: Colors.white,
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -266,12 +280,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
-                        color: Colors.brown,
+                        color: Colors.yellow,
                       ),
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.add_shopping_cart_outlined),
-                      color: Colors.brown,
+                      color: Colors.black,
                       onPressed: addToCart,
                     ),
                   ),
@@ -280,17 +294,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: GlobalVariables.secondaryColor,
+                          foregroundColor: Colors.green,
+                          backgroundColor: GlobalVariables.mainColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => const CartScreen(),
+                          ),
+                        ),
                         child: Text(
                           "Buy  Now".toUpperCase(),
                           style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -312,8 +331,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-              itemBuilder: (context, _) =>
-                  Icon(Icons.star, color: Colors.amberAccent.shade700),
+              itemBuilder: (context, _) => Icon(
+                Icons.circle,
+                color: colorTemp(),
+              ),
               // onRatingUpdate: (rating) {},
               onRatingUpdate: (rating) {
                 productDetailsServices.rateProduct(
@@ -322,7 +343,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   rating: rating,
                 );
               },
-            )
+            ),
+            const SizedBox(height: 50),
           ],
         )));
   }
@@ -366,9 +388,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               style: const TextStyle(color: kTextColor),
               children: [
                 // ignore: prefer_const_constructors
-                TextSpan(text: "Qunatity\n"),
+                TextSpan(text: "Qty\n"),
                 TextSpan(
-                  text: '${widget.product.quantity}',
+                  text: '${widget.product.quantity.toInt()}',
                   style: const TextStyle(
                     fontSize: 15,
                     // color: Colors.red,
@@ -387,6 +409,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 class ColorDot extends StatelessWidget {
   final Color color;
   final bool isSelected;
+  // ignore: use_key_in_widget_constructors
   const ColorDot({
     // required Key key,
     required this.color,

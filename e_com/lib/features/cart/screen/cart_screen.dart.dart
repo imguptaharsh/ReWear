@@ -38,6 +38,7 @@ class _CartScreenState extends State<CartScreen> {
         .map((e) => sum += e['quantity'] * e['product']['price'] as int)
         .toList();
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 252, 250, 235),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(55),
           child: AppBar(
@@ -106,7 +107,7 @@ class _CartScreenState extends State<CartScreen> {
                 child: CustomButton(
                   text: 'Proceed to Buy (${user.cart.length} items)',
                   onTap: () => navigateToAddress(sum),
-                  color: const Color.fromARGB(255, 144, 101, 81),
+                  color: GlobalVariables.mainColor,
                 ),
               ),
               const SizedBox(height: 15),

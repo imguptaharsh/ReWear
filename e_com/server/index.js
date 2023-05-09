@@ -1,9 +1,9 @@
-// Imports form package
-const express= require("express");
-const mongoose = require('mongoose');
+// IMPORTS FROM PACKAGES
+const express = require("express");
+const mongoose = require("mongoose");
 const adminRouter = require("./routes/admin");
-// Imports from other files
-const authRouter= require('./routes/auth');
+// IMPORTS FROM OTHER FILES
+const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 

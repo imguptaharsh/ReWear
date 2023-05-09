@@ -1,9 +1,10 @@
+import 'package:e_com/constants/global_variable.dart';
 import 'package:e_com/features/admin/services/admin_services.dart';
 import 'package:flutter/material.dart';
-// import 'package:fl_chart/fl_chart.dart';
 import '../../../common/widgets/loader.dart';
 import '../models/sales.dart';
-// import '../widgets/category_products_chart.dart';
+import 'package:charts_flutter_new/flutter.dart' as charts;
+import '../widgets/category_products_chart.dart';
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});
@@ -32,29 +33,54 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // double height = MediaQuery.of(context).size.height;
+    // var padding = MediaQuery.of(context).padding;
+    // double newheight = height - padding.top;
+
     return earnings == null || totalSales == null
         ? const Loader()
-        : Column(
-            children: [
-              Text(
-                '\$$totalSales',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        : Container(
+            color: const Color.fromARGB(255, 252, 250, 235),
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // ignore: prefer_const_constructors
+                    Text(
+                      'Total Selling:',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '₹$totalSales',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                  // height: 250,
-                  // child: CategoryProductsChart(seriesList: [
-                  //   charts.Series(
-                  //     id: 'Sales',
-                  //     data: earnings!,
-                  //     domainFn: (Sales sales, _) => sales.label,
-                  //     measureFn: (Sales sales, _) => sales.earning,
-                  //   ),
-                  // ]),
-                  )
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 500,
+                  child: CategoryProductsChart(seriesList: [
+                    charts.Series(
+                      id: 'Sales',
+                      data: earnings!,
+                      colorFn: (_, __) => charts.Color.fromHex(code: '#F1C300'),
+                      domainFn: (Sales sales, _) => sales.label,
+                      measureFn: (Sales sales, _) => sales.earning,
+                    ),
+                  ]),
+                )
+              ],
+            ),
           );
   }
 }

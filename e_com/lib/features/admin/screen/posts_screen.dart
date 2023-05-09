@@ -48,7 +48,7 @@ class _PostsScreenState extends State<PostsScreen> {
     return products == null
         ? const Loader()
         : Scaffold(
-            // backgroundColor: Color.fromARGB(255, 195, 190, 187),
+            backgroundColor: const Color.fromARGB(255, 252, 250, 235),
             body: GridView.builder(
                 itemCount: products!.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -58,7 +58,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   return Column(children: [
                     SizedBox(
                         // color: Color.fromARGB(255, 195, 190, 187),
-                        height: 140,
+                        height: 120,
                         child: SingleProduct(
                           image: productData.images[0],
                         )),
@@ -79,10 +79,11 @@ class _PostsScreenState extends State<PostsScreen> {
                   ]);
                 }),
             floatingActionButton: FloatingActionButton(
-                backgroundColor: GlobalVariables.selectedNavBarColor,
+                focusColor: Colors.black,
+                backgroundColor: const Color.fromARGB(255, 153, 246, 87),
                 onPressed: navigateToAddProduct,
                 tooltip: 'Add a product!',
-                foregroundColor: Colors.white,
+                foregroundColor: Colors.black,
                 child: const Icon(Icons.add)),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,

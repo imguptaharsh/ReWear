@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:dio/dio.dart';
 import 'package:e_com/constants/error_handling.dart';
 import 'package:e_com/constants/utils.dart';
 import 'package:e_com/features/admin/models/sales.dart';
@@ -29,13 +30,17 @@ class AdminServices {
     try {
       final cloudinary = CloudinaryPublic('dl2ny1j0y', 'c6qkjndh');
       List<String> imageUrls = [];
-
+      // var dio = Dio();
       for (int i = 0; i < images.length; i++) {
         CloudinaryResponse res = await cloudinary.uploadFile(
-          CloudinaryFile.fromFile(images[i].path, folder: name),
+          CloudinaryFile.fromFile(
+            images[i].path,
+            folder: name,
+          ),
         );
         imageUrls.add(res.secureUrl);
       }
+
       Product product = Product(
         name: name,
         description: description,
@@ -61,9 +66,22 @@ class AdminServices {
           Navigator.pop(context);
         },
       );
+      // ignore: nullable_type_in_catch_clause
+    } on DioError catch (e) {
+      // ignore: todo
+      // TODO: Error handling
+      if (e.response != null) {
+        // ignore: avoid_print
+        print(e.toString());
+      } else {
+        // print(e.request);
+        // ignore: avoid_print
+        print(e.toString());
+      }
     } catch (e) {
       showSnackBar(context, e.toString());
-      // print(e.toString());
+      // ignore: avoid_print
+      print(e.toString());
     }
   }
 
@@ -127,24 +145,30 @@ class AdminServices {
   // fetching orders
   Future<List<Order>> fetchAllOrders(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Order> orderList = [];
+    List<Order>? orderList = [];
     try {
       http.Response res =
           await http.get(Uri.parse('$uri/admin/get-orders'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token,
       });
+
       // ignore: use_build_context_synchronously
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              orderList.add(
-                Order.fromJson(jsonEncode(jsonDecode(res.body)[i])),
-              );
-            }
-          });
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            orderList.add(
+              Order.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
@@ -152,12 +176,14 @@ class AdminServices {
   }
 
   // to change order status
-  void changeOrderStatus(
-      {required BuildContext context,
-      required int status,
-      required Order order,
-      required VoidCallback onSuccess}) async {
+  void changeOrderStatus({
+    required BuildContext context,
+    required int? status,
+    required Order order,
+    required VoidCallback onSuccess,
+  }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/admin/change-order-status'),
@@ -170,11 +196,12 @@ class AdminServices {
           'status': status,
         }),
       );
+
       // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {},
+        onSuccess: onSuccess,
       );
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -184,29 +211,31 @@ class AdminServices {
   // Analytics Chart
   Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Sales> sales = [];
-    int totalEarning = 0;
+    List<Sales>? sales = [];
+    int? totalEarning = 0;
     try {
       http.Response res =
           await http.get(Uri.parse('$uri/admin/analytics'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token,
       });
+
       // ignore: use_build_context_synchronously
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            var response = jsonDecode(res.body);
-            totalEarning = response['totalEarnings'];
-            sales = [
-              Sales('Men', response['menEarnings']),
-              Sales('Women', response['womenEarnings']),
-              Sales('kids', response['kidsEarnings']),
-              Sales('Shoes', response['shoesEarnings']),
-              // Sales('Fashion', response['fashionEarnings']),
-            ];
-          });
+        response: res,
+        context: context,
+        onSuccess: () {
+          var response = jsonDecode(res.body);
+          totalEarning = response['totalEarnings'];
+          sales = [
+            Sales('Men', response['menEarnings']),
+            Sales('Women', response['womenEarnings']),
+            Sales('kids', response['kidsEarnings']),
+            Sales('Shoes', response['shoesEarnings']),
+            // Sales('Fashion', response['fashionEarnings']),
+          ];
+        },
+      );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
